@@ -20,6 +20,8 @@ const getCocktails = (e) => {
            
         }
 
+        ui.clearResults()
+
         serverResponse.then(cocktails => {
                 let cocktailNames = cocktails.cocktails.drinks;
                 if(cocktailNames === null) {
@@ -28,7 +30,7 @@ const getCocktails = (e) => {
                    if(type === 'name') {
                         ui.displayDrinksWithIngredients(cocktailNames)
                    } else {
-                        ui.displayDrink(cocktailNames);
+                        ui.displayDrinks(cocktailNames);
                    }
                 }
             })

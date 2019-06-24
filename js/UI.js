@@ -74,4 +74,8 @@ class UI {
        })
        return ingredientsTemp
     }
+
+    displayDrink(name) {
+        
+    }
 }

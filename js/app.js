@@ -7,13 +7,29 @@ const getCocktails = (e) => {
     if(searchTerm === '') {
         ui.printMessage('Please add a value', 'danger')
     } else {
-        cocktail.getDrinksByName(searchTerm)
-            .then(cocktails => {
+
+        let serverResponse;
+        const type = document.querySelector('#type').value;
+        switch(type) {
+            case 'name':
+                serverResponse = cocktail.getDrinksByName(searchTerm)
+                break;
+            case 'ingredient':
+                serverResponse = cocktail.getDrinksByIngredient(searchTerm)
+                break;
+           
+        }
+
+        serverResponse.then(cocktails => {
                 let cocktailNames = cocktails.cocktails.drinks;
                 if(cocktailNames === null) {
                     ui.printMessage(`there are no results, try a different one`, 'danger')
                 } else {
-                    ui.displayDrinksWithIngredients(cocktailNames)
+                   if(type === 'name') {
+                        ui.displayDrinksWithIngredients(cocktailNames)
+                   } else {
+                        ui.displayDrink(cocktailNames);
+                   }
                 }
             })
     }

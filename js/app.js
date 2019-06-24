@@ -9,10 +9,11 @@ const getCocktails = (e) => {
     } else {
         cocktail.getDrinksByName(searchTerm)
             .then(cocktails => {
-                if(cocktails.cocktails.drinks === null) {
+                let cocktailNames = cocktails.cocktails.drinks;
+                if(cocktailNames === null) {
                     ui.printMessage(`there are no results, try a different one`, 'danger')
                 } else {
-                    console.log(cocktails)
+                    ui.displayDrinksWithIngredients(cocktailNames)
                 }
             })
     }

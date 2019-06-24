@@ -4,9 +4,9 @@ const getCocktails = (e) => {
     e.preventDefault()
     let searchTerm = document.querySelector('#search').value;
     if(searchTerm === '') {
-        ui.printMessage()
+        ui.printMessage('Please add a value', 'danger')
     } else {
-        console.log('works')
+        
     }
 }
 

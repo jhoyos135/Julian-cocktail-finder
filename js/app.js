@@ -1,4 +1,5 @@
-const ui = new UI()
+const ui = new UI();
+const cocktail = new CocktailAPI();
 
 const getCocktails = (e) => {
     e.preventDefault()
@@ -6,7 +7,14 @@ const getCocktails = (e) => {
     if(searchTerm === '') {
         ui.printMessage('Please add a value', 'danger')
     } else {
-        
+        cocktail.getDrinksByName(searchTerm)
+            .then(cocktails => {
+                if(cocktails.cocktails.drinks === null) {
+                    ui.printMessage(`there are no results, try a different one`, 'danger')
+                } else {
+                    console.log(cocktails)
+                }
+            })
     }
 }
 

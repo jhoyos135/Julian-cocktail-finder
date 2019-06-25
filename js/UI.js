@@ -25,6 +25,11 @@ class UI {
             resultsDiv.innerHTML += `
                 <div class='col-md-6'>
                     <div class='card my-3'>
+
+                    <button type='button' data-id='${drink.idDrink}' class='favorite-btn btn btn-outline-info'> 
+                        +
+                    </button>
+
                         <img class='card-img-top' src='${drink.strDrinkThumb}' alt='${drink.strDrink}' />
                         <div class='card-body'> 
                             <h2 class='card-title text-center'> ${drink.strDrink} </h2>
@@ -52,6 +57,7 @@ class UI {
                 </div>
             `;
         })
+        ui.isFavorite()
     }
 
     displayIngredients(drink) {
@@ -84,6 +90,9 @@ class UI {
             resultsDiv.innerHTML += `
                 <div class='col-md-4'>
                     <div class='card my-3'>
+                    <button type='button' data-id='${drink.idDrink}' class='favorite-btn btn btn-outline-info'> 
+                    +
+                    </button>
                     <img class='card-img-top' src='${drink.strDrinkThumb}' alt='${drink.strDrink}' />
                     <div class='card-body'>
                          <h2 class='card-title text-center'> ${drink.strDrink} </h2>
@@ -95,6 +104,7 @@ class UI {
                 </div>
             `;
         })
+        ui.isFavorite()
     }
     displaySingleRecipe(recipe) {
       const modalTitle = document.querySelector('.modal-title');
@@ -126,6 +136,48 @@ class UI {
 
                 })
             })
+            ui.isFavorite()
+    }
+
+    displayFavorites(favorites) {
+        const favoritesTable = document.querySelector('#favorites tbody');
+        favorites.forEach(drink => {
+            const tr =document.createElement('tr');
+            tr.innerHTML = `
+                <td>
+                    <img src='${drink.image}' alt='${drink.name}' width='100'  />
+                </td>
+                <td>
+                    ${drink.name}
+                </td>
+                <td>
+                    <a href='#' data-toggle='modal' data-target='#recipe' data-id='${drink.id}' class='btn btn-success get-recipe'>
+                        view
+                    </a>
+                </td>
+                <td>
+                <a href='#' data-id='${drink.id}' class='btn btn-danger remove-recipe'>
+                    Remove
+                </a>
+            </td>
+            `;
+            favoritesTable.appendChild(tr);
+        })
+    }
+    removeFavorite(element) {
+        element.remove()
+    }
+
+    isFavorite() {
+        const drinks = cocktailDB.getFromDB();
+        drinks.forEach(drink => {
+            const {id} = drink;
+            let favoriteDrink = document.querySelector(`[data-id="${id}"]`);
+            if(favoriteDrink) {
+                favoriteDrink.classList.add('is-favorite');
+                favoriteDrink.textContent = '-'
+            }
+        })
     }
 
     clearResults() {

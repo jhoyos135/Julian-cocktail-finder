@@ -19,6 +19,10 @@ const getCocktails = (e) => {
                 break;
             case 'category':
                 serverResponse = cocktail.getDrinksByCategory(searchTerm)
+                break;
+            case 'alcohol':
+                serverResponse = cocktail.getDrinksByAlcohol(searchTerm)
+                break;
            
         }
 

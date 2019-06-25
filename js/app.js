@@ -17,6 +17,8 @@ const getCocktails = (e) => {
             case 'ingredient':
                 serverResponse = cocktail.getDrinksByIngredient(searchTerm)
                 break;
+            case 'category':
+                serverResponse = cocktail.getDrinksByCategory(searchTerm)
            
         }
 
@@ -47,6 +49,13 @@ const resultsDelegation = (e) => {
     }
 }
 
+const documentReady = (e) => {
+    const searchCategory = document.querySelector('.search-category');
+    if(searchCategory) {
+        ui.displayCategories()
+    }
+}
+
 const eventListeners = () => {
 
     const searchForm = document.querySelector('#search-form');
@@ -58,6 +67,8 @@ const eventListeners = () => {
     if(resultsDiv) {
         resultsDiv.addEventListener('click', resultsDelegation)
     }
+
+    document.addEventListener('DOMContentLoaded', documentReady)
 }
 
 eventListeners();

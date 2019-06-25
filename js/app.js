@@ -35,6 +35,16 @@ const getCocktails = (e) => {
                 }
             })
     }
+};
+
+const resultsDelegation = (e) => {
+    e.preventDefault();
+    if(e.target.classList.contains('get-recipe')) {
+        cocktail.getSingleRecipe(e.target.dataset.id)
+            .then(recipe => {
+                ui.displaySingleRecipe(recipe.recipe.drinks[0])
+            })
+    }
 }
 
 const eventListeners = () => {
@@ -42,6 +52,11 @@ const eventListeners = () => {
     const searchForm = document.querySelector('#search-form');
     if(searchForm) {
         searchForm.addEventListener('submit', getCocktails);
+    }
+
+    const resultsDiv = document.querySelector('#results');
+    if(resultsDiv) {
+        resultsDiv.addEventListener('click', resultsDelegation)
     }
 }
 

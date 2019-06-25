@@ -80,14 +80,14 @@ class UI {
         
         const resultsDiv = document.querySelector('#results');
 
-        drinks.forEach(drink => {
+        drinks.forEach(drink => { 
             resultsDiv.innerHTML += `
                 <div class='col-md-4'>
                     <div class='card my-3'>
                     <img class='card-img-top' src='${drink.strDrinkThumb}' alt='${drink.strDrink}' />
                     <div class='card-body'>
                          <h2 class='card-title text-center'> ${drink.strDrink} </h2>
-                         <a href='#' data-toggle='modal' data-id='${drink.isDrink}' class='btn btn-success'> 
+                         <a href='#' data-target='#recipe' data-toggle='modal' data-id='${drink.idDrink}' class='btn btn-success get-recipe'> 
                             Get Recipe
                          </a>
                     </div>
@@ -95,6 +95,17 @@ class UI {
                 </div>
             `;
         })
+    }
+    displaySingleRecipe(recipe) {
+      const modalTitle = document.querySelector('.modal-title');
+      const modalDescription = document.querySelector('.modal-body .description-text');
+      const modalIngredients = document.querySelector('.modal-body .ingredient-list .list-group');
+
+
+      modalTitle.innerHTML = recipe.strDrink;
+      modalDescription.innerHTML = recipe.strInstructions;
+
+      modalIngredients.innerHTML = this.displayIngredients(recipe);
     }
 
     clearResults() {
